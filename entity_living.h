@@ -8,4 +8,6 @@ typedef struct entity_living{
   uint16_t health;
 } entity_living_t;
 
+void entity_update(entity_t *entity);
+
 void take_damage(entity_living_t *entity_live);
