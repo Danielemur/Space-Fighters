@@ -11,9 +11,7 @@ typedef struct entity_living{
 void entity_living_init(stage_t *stage,
 			entity_living_t *entity_live,
 			uint16_t health,
-			vec2_t position,
-			vec2_t velocity,
-			vec2_t acceleration);
+		        movement_t movement);
 
 void entity_update(entity_t *entity);
 

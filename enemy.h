@@ -24,6 +24,4 @@ typedef struct enemy{
 void enemy_init(stage_t *stage,
 		enemy_t *enemy,
 		enemy_id_t enemy_id,
-		vec2_t position,
-		vec2_t velocity,
-		vec2_t acceleration);
+	        movement_t movement);

@@ -2,14 +2,10 @@
 #include "entity.h"
 
 void entity_init(stage_t *stage,
-		   entity_t *entity,
-		 vec2_t position,
-		 vec2_t velocity,
-		 vec2_t acceleration)
+		 entity_t *entity,
+		 movement_t movement)
 {
-  entity->position = position;
-  entity->velocity = velocity;
-  entity->acceleration = acceleration;
+  entity->movement = movement;
   stage_add_entity(stage, entity);
 }
 

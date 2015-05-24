@@ -18,6 +18,4 @@ typedef struct player{
 void player_init(stage_t *stage,
 		 player_t* player,
 		 player_id_t player_id,
-		 vec2_t position,
-		 vec2_t velocity,
-		 vec2_t acceleration);
+		 movement_t movement);

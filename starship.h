@@ -17,6 +17,4 @@ void starship_init(stage_t *stage,
 		   uint16_t health,
 		   uint16_t armor_level,
 		   uint16_t weaponry_level,
-		   vec2_t position,
-		   vec2_t velocity,
-		   vec2_t acceleration);
+		   movement_t movement);
