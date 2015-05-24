@@ -13,6 +13,4 @@ void entity_living_init(entity_living_t *entity_live,
 			entity_type_t type,
 		        movement_t movement);
 
-void entity_update(entity_t *entity);
-
-void take_damage(entity_living_t *entity_live);
+void entity_living_update(entity_t *entity, stage_t *stage);

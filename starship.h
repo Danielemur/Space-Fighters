@@ -10,6 +10,7 @@ typedef struct starship{
   entity_living_t entity_live;
   uint16_t armor_level;
   uint16_t weaponry_level;
+  double hit_radius;
   float charge;
 } starship_t;
 
@@ -21,3 +22,5 @@ void starship_init(starship_t *starship,
 		   movement_t movement);
 
 void starship_fire(starship_t *starship, uint16_t damage);
+
+void starship_update(entity_t *entity, stage_t *stage);

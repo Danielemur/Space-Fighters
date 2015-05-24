@@ -5,10 +5,12 @@ void starship_init(starship_t *starship,
 		   uint16_t health,
 		   uint16_t armor_level,
 		   entity_type_t type,
+		   double hit_radius,
 		   movement_t movement)
 {
   starship->armor_level = armor_level;
   starship->weaponry_level = weaponry_level;
+  starship->hit_radius = hit_radius;
   starship->charge = FULL_CHARGE;
   entity_living_init(&starship->entity_live, health, type, movement);
 }
@@ -28,8 +30,9 @@ void starship_fire(starship_t *starship)
   }
 }
 
-void starship_update(starship_t *starship)
+void starship_update(entity_t *entity, stage_t *stage)
 {
+  starship_t *starship = (starship_t*)entity;
   starship->charge++;
   entity_living_update((entity_t*)starship);
 }

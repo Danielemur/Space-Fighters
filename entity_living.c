@@ -10,10 +10,11 @@ void entity_living_init(entity_living_t *entity_live,
   entity_init(&entity_live->entity, type, movement);
 }
 
-void entity_living_update(entity_living_t *entity_live)
+void entity_living_update(entity_t *entity, stage_t *stage)
 {
+  entity_living_t *entity_live = (entity_living_t*)entity;
   if (entity_live->health <=0)
-    stage_remove_entity((entity*)entity_live);
+    stage_remove_entity(stage, (entity*)entity_live);
   else
     entity_update(entity_live);
 }

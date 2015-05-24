@@ -11,6 +11,7 @@
 #define BOSS_HEALTH 500
 #define BOSS_ARMOR 4
 #define BOSS_TYPE_COUNT 4
+#define ENEMY_HIT_RADIUS 25
 
 typedef enum
   {

@@ -25,11 +25,11 @@ typedef struct entity {
   entity_type_t type;
   struct entity *last;
   struct entity *next;
-  void (*update)(struct entity *entity);
+  void (*update)(struct entity *entity, stage_t *stage);
 } entity_t;
 
 void entity_init(entity_t *entity,
 		 entity_type_t type,
 		 movement_t movement);
 
-void entity_update(entity_t *entity);
+void entity_update(entity_t *entity, stage_t *stage);

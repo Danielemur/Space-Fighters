@@ -12,7 +12,7 @@ void player_init(player_t* player,
 		 movement_t movement)
 {
   player->player_id = player_id;
-  starship_init(&player->ship, PLAYER_HEALTH, PLAYER_ARMOR, PLAYER, movement);
+  starship_init(&player->ship, PLAYER_HEALTH, PLAYER_ARMOR, PLAYER, PLAYER_HIT_RADIUS, movement);
 }
 
 void player_update(entity_t *entity,stage_t *stage)
