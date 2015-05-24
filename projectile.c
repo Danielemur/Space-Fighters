@@ -1,15 +1,5 @@
 #include "projectile.h"
 
-void projectile_init(projectile_t *projectile,
-		     int projectile_id,
-		     uint16_t damage,
-		     movement_t movement)
-{
-  projectile->projectile_id = projectile_id;
-  projectile->damage = damage;
-  entity_living_init(&projectile->entity_live, PROJECTILE_HEALTH, PROJECTILE, movement);
-}
-
 void projectile_update(entity_t *entity, stage_t *stage)
 {
   projectile_t *projectile = (projectile_t*)entity;
@@ -32,4 +22,15 @@ void projectile_update(entity_t *entity, stage_t *stage)
     }
   }
   entity_living_update(projectile);
+}
+
+void projectile_init(projectile_t *projectile,
+		     int projectile_id,
+		     uint16_t damage,
+		     movement_t movement)
+{
+  projectile->projectile_id = projectile_id;
+  projectile->damage = damage;
+  player->entity_living.entity.update = projectile_update;
+  entity_living_init(&projectile->entity_live, PROJECTILE_HEALTH, PROJECTILE, movement);
 }

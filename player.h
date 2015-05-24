@@ -6,6 +6,8 @@
 #define PLAYER_ARMOR 0
 #define PLAYER_TYPE_COUNT 4
 #define PLAYER_HIT_RADIUS 20
+#define PLAYER_SPEED 5
+#define PLAYER_ACCELERATION 1
 
 typedef enum
   {
