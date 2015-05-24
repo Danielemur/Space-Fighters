@@ -4,7 +4,8 @@
 #include "stage.h"
 
 #define ORIGIN {0,0}
-#define DEFAULT_MOVEMENT {{0, 0}, {0, 0}, {0, 0}}
+#define DEFAULT_MOVEMENT {{0, 0}, {0, 0}, {0, 0}, {0, 0}}
+#define FPS 15
 #define ENTITY_TYPE_NUMBER 6
 
 typedef enum {
@@ -15,6 +16,8 @@ typedef struct movement {
   vec2_t position;
   vec2_t velocity;
   vec2_t acceleration;
+  vec2_t orientation;
+  
 } movement_t;
 
 typedef struct entity {
@@ -22,6 +25,7 @@ typedef struct entity {
   entity_type_t type;
   struct entity *last;
   struct entity *next;
+  void (*update)(struct entity *entity);
 } entity_t;
 
 void entity_init(entity_t *entity,
@@ -29,9 +33,3 @@ void entity_init(entity_t *entity,
 		 movement_t movement);
 
 void entity_update(entity_t *entity);
-
-void entity_set_position(entity_t *entity);
-
-void entity_set_velocity(entity_t *entity);
-
-void entity_set_acceleration(entity_t *entity);
