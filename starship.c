@@ -10,6 +10,7 @@ void starship_init(stage_t *stage,
 		   vec2_t acceleration);
 {
   starship->armor_level = armor_level;
-  starship->charge_level = FULL_CHARGE;
+  starship->weaponry_level = weaponry_level;
+  starship->charge = FULL_CHARGE;
   entity_living_init(stage, &starship->entity_live, health);
 }

@@ -2,18 +2,23 @@
 
 #include <stdio.h>
 
+void stage_init()
+{
 
-void stage_Initialize(){
+}
+
+void stage_run(){
 	/*setup pos and stuff here*/
-	int done=0;
-	while(done!=1){
-		done=step();
-	}
-	/*game done*/
+  
+	while(stage_step())
+	  {
+	    
+	  }
+	/*game cleanup*/
 }
 
 
-int stage_Step(){
+int stage_step(){
 	/*calculate velocity stuff as well as death of players and such*/
 
 	return 1;
