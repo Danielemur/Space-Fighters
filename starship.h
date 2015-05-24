@@ -17,4 +17,5 @@ void starship_init(stage_t *stage,
 		   uint16_t health,
 		   uint16_t armor_level,
 		   uint16_t weaponry_level,
+		   entity_type_t type,
 		   movement_t movement);

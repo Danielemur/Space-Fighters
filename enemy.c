@@ -7,5 +7,5 @@ void enemy_init(stage_t *stage,
 		 movement_t movement)
 {
   enemy->enemy_id = enemy_id;
-  starship_init(stage, &enemy->ship, PLAYER_HEALTH, PLAYER_ARMOR, movement);
+  starship_init(stage, &enemy->ship, PLAYER_HEALTH, PLAYER_ARMOR, ENEMY, movement);
 }

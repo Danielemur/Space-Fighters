@@ -3,6 +3,7 @@
 
 void entity_init(stage_t *stage,
 		 entity_t *entity,
+		 entity_type_t type,
 		 movement_t movement)
 {
   entity->movement = movement;
