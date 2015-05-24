@@ -33,13 +33,14 @@ void enemy_update(entity_t *entity,stage_t *stage)
   enemy->movement.acceleration = vec2_scale(vec2_unitize(vec2_sub(closest_entity->movement.position, enemy->movement.position)), ENEMY_ACCELERATION);
  entity_update((entity*)enemy);
 }
-  
+
 void enemy_init(stage_t *stage,
 		 enemy_t* enemy,
 		 enemy_id_t enemy_id,
 		 movement_t movement)
 {
   enemy->enemy_id = enemy_id;
+
   enemy->starship.entity_living.entity.update = enemy_update;
   starship_init(stage, &enemy->ship, PLAYER_HEALTH, PLAYER_ARMOR, ENEMY, ENEMY_HIT_RADIUS, movement);
 }

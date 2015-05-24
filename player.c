@@ -5,22 +5,8 @@
 
 #include "player.h"
 
-int play_char(){
-  //got to check if window focus
-  struct termios oldt, newt;
-  int ch;
-  
-  tcgetattr( STDIN_FILENO, &oldt);
-  newt=oldt;
-  newt.c_lflag &= ~(ICANON);
-  tcsetattr( STDIN_FILENO, TCSANOW, &newt);
-  ch=getchar();
-  tcsetattr( STDIN_FILENO, TCSANOW, &oldt);
-  
-  //check stuff, return vals
-  return ch;
-   
-}
+#define PLAYER_SPEED 5;
+
 
 void player_update(entity_t *entity,stage_t *stage)
 {
@@ -30,7 +16,7 @@ void player_update(entity_t *entity,stage_t *stage)
   double current_speed = vec2_mag(player->movement.velocity);
   
   if (current_speed < PLAYER_SPEED) {
-    if (ch=='w') {
+   if (ch=='w') {
       player->movement.acceleration = {0, 1};
     } else if (ch=='a') {
       player->movement.acceleration = {-1, 0};
@@ -50,11 +36,29 @@ void player_update(entity_t *entity,stage_t *stage)
   
 }
 
+
+int play_char(){
+  //got to check if window focus
+  struct termios oldt, newt;
+  int ch;
+  
+  tcgetattr( STDIN_FILENO, &oldt);
+  newt=oldt;
+  newt.c_lflag &= ~(ICANON);
+  tcsetattr( STDIN_FILENO, TCSANOW, &newt);
+  ch=getchar();
+  tcsetattr( STDIN_FILENO, TCSANOW, &oldt);
+  
+  //check stuff, return vals
+  return ch;
+}  
 void player_init(player_t* player,
 		 player_id_t player_id,
 		 movement_t movement)
 {
   player->player_id = player_id;
-  player->starship.entity_living.entity.update = player_update;
-  starship_init(&player->ship, PLAYER_HEALTH, PLAYER_ARMOR, PLAYER, PLAYER_HIT_RADIUS, movement);
-}
+  player->entity_living.entity.update=player_update;
+  starship_init(&player->ship, PLAYER_HEALTH, PLAYER_ARMOR, PLAYER, movement);
+}   
+
+
