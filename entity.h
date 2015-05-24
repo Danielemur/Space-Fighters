@@ -1,12 +1,13 @@
 #pragma once
 
 #include "vec2.h"
-#include "stage.h"
+#include "common.h"
 
 #define ORIGIN {0,0}
-#define DEFAULT_MOVEMENT {{0, 0}, {0, 0}, {0, 0}, {0, 0}}
 #define FPS 15
 #define ENTITY_TYPE_NUMBER 6
+
+typedef struct stage stage_t;
 
 typedef enum {
   PLAYER, ENEMY, PROJECTILE, POWERUP, UPGRADE, ASTEROID
@@ -17,7 +18,6 @@ typedef struct movement {
   vec2_t velocity;
   vec2_t acceleration;
   vec2_t orientation;
-  
 } movement_t;
 
 typedef struct entity {

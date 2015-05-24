@@ -19,8 +19,9 @@ void starship_init(starship_t *starship,
 		   uint16_t armor_level,
 		   uint16_t weaponry_level,
 		   entity_type_t type,
+		   double hit_radius,
 		   movement_t movement);
 
-void starship_fire(starship_t *starship, uint16_t damage);
+void starship_fire(starship_t *starship, stage_t *stage);
 
 void starship_update(entity_t *entity, stage_t *stage);

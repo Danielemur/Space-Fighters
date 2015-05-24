@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include <math.h>
 #include "common.h"
-#include "vec3.h"
 
 uint32_t jenkins(uint32_t a, uint32_t b, uint32_t c)
 {
@@ -17,9 +16,9 @@ uint32_t jenkins(uint32_t a, uint32_t b, uint32_t c)
     return c;
 }
 
-vfloat jenkinsf(uint32_t a, uint32_t b, uint32_t c)
+double jenkinsf(uint32_t a, uint32_t b, uint32_t c)
 {
-    return jenkins(a, b, c) / (vfloat) UINT32_MAX;
+    return jenkins(a, b, c) / (double) UINT32_MAX;
 }
  
 
@@ -34,8 +33,8 @@ xorshift(uint64_t *state)
     return x * UINT64_C(2685821657736338717);
 }
 
-vfloat
+double
 xorshiftf(uint64_t *state)
 {
-    return xorshift(state) / (vfloat)UINT64_MAX;
+    return xorshift(state) / (double)UINT64_MAX;
 }

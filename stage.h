@@ -1,6 +1,9 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stdbool.h>
+#include "entity.h"
+#include "player.h"
 
 typedef struct stage{
   size_t entity_count;

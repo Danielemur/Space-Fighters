@@ -1,0 +1,18 @@
+asteroid.o: asteroid.c asteroid.h entity.h vec2.h common.h stage.h \
+ player.h starship.h entity_living.h
+common.o: common.c common.h
+enemy.o: enemy.c enemy.h starship.h entity_living.h entity.h vec2.h \
+ common.h stage.h player.h
+entity.o: entity.c entity.h vec2.h common.h
+entity_living.o: entity_living.c entity_living.h entity.h vec2.h common.h \
+ stage.h player.h starship.h
+main.o: main.c stage.h entity.h vec2.h common.h player.h starship.h \
+ entity_living.h asteroid.h
+player.o: player.c player.h starship.h entity_living.h entity.h vec2.h \
+ common.h
+projectile.o: projectile.c projectile.h entity_living.h entity.h vec2.h \
+ common.h asteroid.h stage.h player.h starship.h
+stage.o: stage.c stage.h entity.h vec2.h common.h player.h starship.h \
+ entity_living.h enemy.h
+starship.o: starship.c starship.h entity_living.h entity.h vec2.h \
+ common.h player.h projectile.h stage.h

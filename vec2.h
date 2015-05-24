@@ -74,12 +74,12 @@ static inline vec2_t vec2_refl(vec2_t v1, vec2_t v2)
 
 static inline vec2_t vec2_min(vec2_t v1, vec2_t v2)
 {
-  return (vec2_t){minf(v1.x, v2.x), minf(v1.y, v2.y)};
+  return (vec2_t){fmin(v1.x, v2.x), fmin(v1.y, v2.y)};
 }
 
 static inline vec2_t vec2_max(vec2_t v1, vec2_t v2)
 {
-    return (vec2_t){maxf(v1.x, v2.x), maxf(v1.y, v2.y)};
+    return (vec2_t){fmax(v1.x, v2.x), fmax(v1.y, v2.y)};
 }
 
 static inline vec2_t vec2_proj(vec2_t v1, vec2_t v2)

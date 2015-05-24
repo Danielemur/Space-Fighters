@@ -1,6 +1,7 @@
 #pragma once
 
 #include "entity.h"
+#include "stage.h"
 
 #define ASTEROID_HIT_RADIUS 10
 
@@ -9,6 +10,6 @@ typedef struct asteroid {
   int tex_id;
 } asteroid_t;
 
-void asteroit_init(asteroid_t *asteroid);
+void asteroid_init(asteroid_t *asteroid, int tex_id, movement_t movement);
 
 void asteroid_update(entity_t *entity, stage_t *stage);

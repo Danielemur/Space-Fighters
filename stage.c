@@ -1,5 +1,7 @@
 #include "stage.h"
-#include "common.h"
+#include "entity.h"
+#include "player.h"
+#include "enemy.h"
 
 #define STAGE_WIDTH 1500
 #define STAGE_HEIGHT 1500
@@ -22,27 +24,6 @@ void stage_remove_entity(stage_t *stage, entity_t *entity)
   if (entity->next != NULL)
     entity->next->last = entity->last;
   free(entity);
-}
-
-void stage_init(stage_t *stage)
-{
-  /*setup pos and stuff here*/
-  *stage= {0};
-  player_t *player = malloc(sizeof(player_t));
-  player_init(stage, player, PLAYER_0, DEFAULT_MOVEMENT);
-  stage_add_entity(stage, (entity*)player);
-  uint32_t k = jenkins(stage->entity_count, STAGE_WIDTH, ASTEROID_COUNT);
-  for (int i = 0; i < asteroid_count; i++) {
-    asteroid_t *asteroid = malloc(sizeof(asteroid_t));
-    uint32_t rand = k = jenkins((i * k) % (i << k), k % ((k / i) << i), k + i);
-    double x = STAGE_WIDTH * (1 - 2 * (rand & 0xffff) / (double) UINT16_MAX);
-    double y = STAGE_HEIGHT * (1 - 2 * (rand >> 16) / (double) UINT16_MAX);
-    rand = k = jenkins((i * k) % (i << k), k % ((k / i) << i), k + i);
-    double x_rot = (1 - 2 * (rand & 0xffff) / (double) UINT16_MAX);
-    double y_rot = (1 - 2 * (rand >> 16) / (double) UINT16_MAX);
-    asteroid_init(asteroid, rand % 3, {{x, y}, {0, 0}, {0, 0}, vec2_unitize((vec2_t){x_rot, y_rot})});
-    stage_add_entity(stage, (entity*)asteroid);
-  }
 }
 
 void stage_cleanup(stage_t *stage)
@@ -71,8 +52,8 @@ int stage_step(stage_t *stage)
     stage->next_spawn_time = stage->spawn_duration + SPAWN_PERIOD * jenkinsf(stage->entity_count, stage->next_spawn_time, stage->time);
     stage->spawn_duration += spawn_period;
     enemy_t *enemy;
-    enemy_init(stage, enemy, mode, DEFAULT_MOVEMENT);
-    stage_add_entity(stage, (entity*)enemy);
+    enemy_init(stage, enemy, mode, (movement_t){{0, 0}, {0, 0}, {0, 0}});
+    stage_add_entity(stage, (entity_t*)enemy);
     stage->boss = (mode == BOSS);
   }
   /*calculate velocity stuff as well as death of players and such*/
@@ -80,7 +61,7 @@ int stage_step(stage_t *stage)
   for (int i = 0; i < ENTITY_TYPE_NUMBER; i++) {
     while (entity != NULL) {
       if (entity->type == i)
-	entity_update(entity);
+	entity_update(entity, stage);
       entity = entity->next;
     }
     entity = stage->entities;

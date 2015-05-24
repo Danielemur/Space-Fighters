@@ -1,4 +1,6 @@
 #include "projectile.h"
+#include "entity_living.h"
+#include "asteroid.h"
 
 void projectile_update(entity_t *entity, stage_t *stage)
 {
@@ -8,7 +10,7 @@ void projectile_update(entity_t *entity, stage_t *stage)
     if (entity_test->type == PLAYER || entity_test->type == ENEMY) {
       starship_t *starship = (starship_t*)entity_test;
       if (vec2_dist(entity->movement.position, entity_test->movement.position) < PROJECTILE_HIT_RADIUS + starship->hit_radius) {
-	starship->entity_living.health -= projectile->damage;
+	starship->entity_live.health -= projectile->damage;
       }
     }
   }
@@ -21,7 +23,7 @@ void projectile_update(entity_t *entity, stage_t *stage)
       }
     }
   }
-  entity_living_update(projectile);
+  entity_living_update((entity_t*)projectile, stage);
 }
 
 void projectile_init(projectile_t *projectile,
@@ -31,6 +33,6 @@ void projectile_init(projectile_t *projectile,
 {
   projectile->projectile_id = projectile_id;
   projectile->damage = damage;
-  player->entity_living.entity.update = projectile_update;
+  projectile->entity_live.entity.update = projectile_update;
   entity_living_init(&projectile->entity_live, PROJECTILE_HEALTH, PROJECTILE, movement);
 }
