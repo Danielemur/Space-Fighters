@@ -12,8 +12,7 @@ typedef struct starship{
   float charge;
 } starship_t;
 
-void starship_init(stage_t *stage,
-		   starship_t *starship,
+void starship_init(starship_t *starship,
 		   uint16_t health,
 		   uint16_t armor_level,
 		   uint16_t weaponry_level,

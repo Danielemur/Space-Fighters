@@ -4,6 +4,7 @@
 
 #define PLAYER_HEALTH 100
 #define PLAYER_ARMOR 0
+#define PLAYER_TYPE_COUNT 4
 
 typedef enum
   {
@@ -15,7 +16,6 @@ typedef struct player{
   player_id_t player_id;
 } player_t;
 
-void player_init(stage_t *stage,
-		 player_t* player,
+void player_init(player_t* player,
 		 player_id_t player_id,
 		 movement_t movement);
