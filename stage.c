@@ -3,7 +3,6 @@
 
 #define STAGE_WIDTH 1500
 #define STAGE_HEIGHT 1500
-#define FPS 15
 #define SPAWN_PERIOD 10
 #define ASTEROID_COUNT 100
 #define DEATH_CEILING 24
@@ -36,11 +35,21 @@ void stage_init(stage_t *stage)
   for (int i = 0; i < asteroid_count; i++) {
     asteroid_t *asteroid = malloc(sizeof(asteroid_t));
     uint32_t rand = k = jenkins((i * k) % (i << k), k % ((k / i) << i), k + i);
-    double x = STAGE_WIDTH * (1 - 2 * (rand & 0xffff) / (vfloat) UINT16_MAX);
-    double y = STAGE_HEIGHT * (1 - 2 * (rand >> 16) / (vfloat) UINT16_MAX);
-    asteroid_init(stage, asteroid, rand % 3, {{x, y}, {0, 0}, {0, 0}});
+    double x = STAGE_WIDTH * (1 - 2 * (rand & 0xffff) / (double) UINT16_MAX);
+    double y = STAGE_HEIGHT * (1 - 2 * (rand >> 16) / (double) UINT16_MAX);
+    rand = k = jenkins((i * k) % (i << k), k % ((k / i) << i), k + i);
+    double x_rot = (1 - 2 * (rand & 0xffff) / (double) UINT16_MAX);
+    double y_rot = (1 - 2 * (rand >> 16) / (double) UINT16_MAX);
+    asteroid_init(asteroid, rand % 3, {{x, y}, {0, 0}, {0, 0}, vec2_unitize((vec2_t){x_rot, y_rot})});
     stage_add_entity(stage, (entity*)asteroid);
   }
+}
+
+void stage_cleanup(stage_t *stage)
+{
+  while (stage->entity_count > 0)
+    stage_remove_entity(stage, stage->entities);
+  free(stage);
 }
 
 void stage_run(stage_t *stage)
@@ -49,9 +58,7 @@ void stage_run(stage_t *stage)
     {
       /* image generation and display */
     }
-  /*game cleanup*/
-  while (stage->entity_count > 0)
-    stage_remove_entity(stage, stage->entities);
+  /*game end*/
 }
 
 

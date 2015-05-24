@@ -15,8 +15,12 @@ typedef struct stage{
 
 void stage_add_entity(stage_t *stage, entity_t *entity);
 
+void stage_remove_entity(stage_t *stage, entity_t *entity);
+
 void stage_init(stage_t *stage);
 
-void stage_run();
+void stage_cleanup(stage_t *stage);
 
-int stage_step();
+void stage_run(stage_t *stage);
+
+int stage_step(stage_t *stage);
