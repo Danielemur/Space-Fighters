@@ -5,9 +5,10 @@
 
 #define ORIGIN {0,0}
 #define DEFAULT_MOVEMENT {{0, 0}, {0, 0}, {0, 0}}
+#define ENTITY_TYPE_NUMBER 6
 
 typedef enum {
-  ENEMY, PLAYER, POWERUP, UPGRADE, PROJECTILE, ASTEROID
+  PLAYER, ENEMY, PROJECTILE, POWERUP, UPGRADE, ASTEROID
 } entity_type_t;
 
 typedef struct movement {
@@ -23,12 +24,9 @@ typedef struct entity {
   struct entity *next;
 } entity_t;
 
-void entity_init(stage_t *stage,
-		 entity_t *entity,
+void entity_init(entity_t *entity,
 		 entity_type_t type,
 		 movement_t movement);
-
-int entity_destroy(entity_t *entity, stage_t *stage);
 
 void entity_update(entity_t *entity);
 

@@ -10,6 +10,7 @@
 #define ENEMY_2_ARMOR 2
 #define BOSS_HEALTH 500
 #define BOSS_ARMOR 4
+#define BOSS_TYPE_COUNT 4
 
 typedef enum
   {

@@ -8,8 +8,7 @@ typedef struct entity_living{
   uint16_t health;
 } entity_living_t;
 
-void entity_living_init(stage_t *stage,
-			entity_living_t *entity_live,
+void entity_living_init(entity_living_t *entity_live,
 			uint16_t health,
 			entity_type_t type,
 		        movement_t movement);

@@ -1,19 +1,14 @@
 #include <stdio.h>
 #include "entity.h"
 
-void entity_init(stage_t *stage,
-		 entity_t *entity,
+void entity_init(entity_t *entity,
 		 entity_type_t type,
 		 movement_t movement)
 {
+  entity->type = type;
   entity->movement = movement;
-  stage_add_entity(stage, entity);
-}
-
-
-int entity_destroy(entity_t *entity, stage_t *stage)
-{
-
+  entity->last = NULL;
+  entity->next = NULL;
 }
 
 void entity_update(entity_t *entity)
