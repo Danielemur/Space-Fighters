@@ -1,18 +1,17 @@
-asteroid.o: asteroid.c asteroid.h entity.h vec2.h common.h stage.h \
- player.h starship.h entity_living.h
+asteroid.o: asteroid.c asteroid.h entity.h vec2.h common.h stage.h
 common.o: common.c common.h
 enemy.o: enemy.c enemy.h starship.h entity_living.h entity.h vec2.h \
- common.h stage.h player.h
-entity.o: entity.c entity.h vec2.h common.h
+ common.h stage.h
+entity.o: entity.c stage.h entity.h vec2.h common.h
 entity_living.o: entity_living.c entity_living.h entity.h vec2.h common.h \
- stage.h player.h starship.h
-main.o: main.c stage.h entity.h vec2.h common.h player.h starship.h \
- entity_living.h asteroid.h
+ stage.h
+image.o: image.c image.h color.h
+main.o: main.c stage.h entity.h vec2.h common.h image.h color.h
 player.o: player.c player.h starship.h entity_living.h entity.h vec2.h \
- common.h
+ common.h stage.h
 projectile.o: projectile.c projectile.h entity_living.h entity.h vec2.h \
- common.h asteroid.h stage.h player.h starship.h
+ common.h stage.h asteroid.h starship.h player.h
 stage.o: stage.c stage.h entity.h vec2.h common.h player.h starship.h \
- entity_living.h enemy.h
+ entity_living.h enemy.h asteroid.h
 starship.o: starship.c starship.h entity_living.h entity.h vec2.h \
- common.h player.h projectile.h stage.h
+ common.h stage.h player.h projectile.h

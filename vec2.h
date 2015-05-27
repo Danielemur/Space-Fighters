@@ -2,6 +2,7 @@
 
 #include <math.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 enum axis{
     X_AXIS, Y_AXIS, Z_AXIS
@@ -69,17 +70,27 @@ static inline vec2_t vec2_scale(vec2_t v, double s)
 
 static inline vec2_t vec2_refl(vec2_t v1, vec2_t v2)
 {
-  return vec2_sub(v1, vec2_scale(v2, 2 * vec2_dot(v1, v2)));
+    return vec2_sub(v1, vec2_scale(v2, 2 * vec2_dot(v1, v2)));
 }
 
 static inline vec2_t vec2_min(vec2_t v1, vec2_t v2)
 {
-  return (vec2_t){fmin(v1.x, v2.x), fmin(v1.y, v2.y)};
+    return (vec2_t){fmin(v1.x, v2.x), fmin(v1.y, v2.y)};
 }
 
 static inline vec2_t vec2_max(vec2_t v1, vec2_t v2)
 {
     return (vec2_t){fmax(v1.x, v2.x), fmax(v1.y, v2.y)};
+}
+
+static inline bool vec2_equals(vec2_t v1, vec2_t v2)
+{
+    return (v1.x == v2.x && v1.y == v2.y);
+}
+
+static inline bool vec2_in_bounds(vec2_t min, vec2_t max, vec2_t test)
+{
+    return (vec2_equals(vec2_max(test, min), test) && vec2_equals(vec2_min(test, max), test));
 }
 
 static inline vec2_t vec2_proj(vec2_t v1, vec2_t v2)

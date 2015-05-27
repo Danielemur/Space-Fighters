@@ -1,39 +1,46 @@
 #include <stdio.h>
+#include <math.h>
 
 #include "stage.h"
-#include "asteroid.h"
+#include "image.h"
 
-#define STAGE_WIDTH 1500
-#define STAGE_HEIGHT 1500
-#define SPAWN_PERIOD 10
-#define ASTEROID_COUNT 100
-#define DEATH_CEILING 24
-
-void stage_init(stage_t *stage)
+void image_render(stage_t *stage, void **context)
 {
-*stage = (stage_t){0};
-player_t *player = malloc(sizeof(player_t));
-player_init(player, PLAYER_0, (movement_t){{0, 0}, {0, 0}, {0, 0}});
-  stage_add_entity(stage, (entity_t*)player);
-  uint32_t k = jenkins(stage->entity_count, STAGE_WIDTH, ASTEROID_COUNT);
-  for (int i = 0; i < ASTEROID_COUNT; i++) {
-    asteroid_t *asteroid = malloc(sizeof(asteroid_t));
-    uint32_t rand = k = jenkins((i * k) >> (i << k), k >> ((k + i) << i), k + i);
-    double x = STAGE_WIDTH * (1 - 2 * (rand & 0xffff) / (double) UINT16_MAX);
-    double y = STAGE_HEIGHT * (1 - 2 * (rand >> 16) / (double) UINT16_MAX);
-    rand = k = jenkins((i * k) >> (i << k), k >> ((k + i) << i), k + i);
-    double x_rot = (1 - 2 * (rand & 0xffff) / (double) UINT16_MAX);
-double y_rot = (1 - 2 * (rand >> 16) / (double) UINT16_MAX);
-asteroid_init(asteroid, rand % 3, (movement_t){{x, y}, {0, 0}, {0, 0}, vec2_unitize((vec2_t){x_rot, y_rot})});
-    stage_add_entity(stage, (entity_t*)asteroid);
-  }
+    image_t *image = (image_t*)context[0];
+    y4m_writer_t *y4m = (y4m_writer_t*)context[1];
+    for (entity_t *entity = stage->entities; entity != NULL; entity = entity->next) {
+        color_t color;
+        if (entity->type == PLAYER)
+            color = COLOR_RED;
+        else if (entity->type == ENEMY)
+            color = COLOR_GREEN;
+        else if (entity->type == PROJECTILE)
+            color =  COLOR_YELLOW;
+        else if (entity->type == ASTEROID)
+            color =  COLOR_BLUE;
+        for (int i = -2; i < 3; i++) {
+            for (int h = -2; h < 3; h++) {
+                image_set(image, fmin(entity->movement.position.x + i + STAGE_WIDTH / 2, STAGE_WIDTH / 2),
+                          fmin(entity->movement.position.y + h + STAGE_HEIGHT / 2, STAGE_HEIGHT / 2), color);
+            }
+        }
+    }
+    y4m_writer_frame(y4m);
 }
 
 int main(int argc, char **argv)
 {
-  
-  stage_t stage;
-  stage_init(&stage);
-  stage_run(&stage);
-  stage_cleanup(&stage);
+    FILE *space = fopen("space.bmp", "r");
+    image_t *image = image_read_bmp(space);
+//image_create(STAGE_WIDTH, STAGE_HEIGHT);
+    FILE *out = stdout;
+    y4m_writer_t y4m;
+    y4m_writer_init(&y4m, image, 15, out);
+    void *context[2] = {image, &y4m};
+    stage_t stage;
+    stage_init(&stage);
+    stage_run(&stage, image_render, context);
+    stage_cleanup(&stage);
+    y4m_writer_free(&y4m);
+    image_free(image);
 }

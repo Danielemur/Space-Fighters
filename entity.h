@@ -10,22 +10,22 @@
 typedef struct stage stage_t;
 
 typedef enum {
-  PLAYER, ENEMY, PROJECTILE, POWERUP, UPGRADE, ASTEROID
+    PLAYER = 0, ENEMY, PROJECTILE, POWERUP, UPGRADE, ASTEROID
 } entity_type_t;
 
 typedef struct movement {
-  vec2_t position;
-  vec2_t velocity;
-  vec2_t acceleration;
-  vec2_t orientation;
+    vec2_t position;
+    vec2_t velocity;
+    vec2_t acceleration;
+    vec2_t orientation;
 } movement_t;
 
 typedef struct entity {
-  movement_t movement;
-  entity_type_t type;
-  struct entity *last;
-  struct entity *next;
-  void (*update)(struct entity *entity, stage_t *stage);
+    movement_t movement;
+    entity_type_t type;
+    struct entity *last;
+    struct entity *next;
+    void (*update)(struct entity *entity, stage_t *stage);
 } entity_t;
 
 void entity_init(entity_t *entity,

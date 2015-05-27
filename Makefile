@@ -1,4 +1,4 @@
-CFLAGS = -std=c99 -Wall -Wno-unused-function -g3 -fPIC	\
+CFLAGS = -std=c99 -Wall -Wextra -Wno-unused-function -g3 -fPIC	\
 -march=native -Ofast -funroll-loops -fomit-frame-pointer
 LDLIBS = -lm -ldl -lpthread
 
@@ -6,7 +6,7 @@ LDLIBS = -lm -ldl -lpthread
 all : spacefighters
 
 objects = asteroid.o common.o enemy.o entity.o entity_living.o	\
-player.o projectile.o stage.o starship.o
+image.o player.o projectile.o stage.o starship.o
 
 
 
